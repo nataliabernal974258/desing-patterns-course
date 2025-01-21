@@ -1,31 +1,29 @@
-
 /**
  * Rules implement singlenton:
  *  1. Make the constructor private
  *  2. Create a static method who calls the private
  *      constructor and save the instance in a static variable
  */
-
-
-class Singlenton {
-    static instance = undefined;
-
-    constructor(version) {
-        this.version = version;   
+var SinglentonTS = /** @class */ (function () {
+    function SinglentonTS(version) {
+        this.version = version;
     }
-
-    static getInstance(version) { 
-        if (!Singlenton.instance) { 
-            Singlenton.instance = new Singlenton(version);
+    SinglentonTS.getInstance = function (version) {
+        if (!SinglentonTS.instance) {
+            SinglentonTS.instance = new SinglentonTS(version);
         }
-        return Singlenton.instance;
-    }
-}
-function appSinglenton() { 
-    const singlenton1 = Singlenton.getInstance('version-1');
-    const singlenton2 = Singlenton.getInstance('version-2');
-
+        return SinglentonTS.instance;
+    };
+    return SinglentonTS;
+}());
+function appSinglentonTS() {
+    var singlenton1 = SinglentonTS.getInstance('version-1');
+    var singlenton2 = SinglentonTS.getInstance('version-2');
+    /**
+     * I can't instace with new the class Singlento since the constructor is private
+     * const singlenton3 = new SinglentonTS();
+     *
+    */
     console.log(singlenton1 === singlenton2);
 }
-
-appSinglenton();
+appSinglentonTS();
